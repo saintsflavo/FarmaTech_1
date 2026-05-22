@@ -1,0 +1,33 @@
+CREATE DATABASE farmatech;
+USE farmatech;
+
+CREATE TABLE tbl_usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    login_usuario VARCHAR(50) NOT NULL UNIQUE,
+    senha_usuario VARCHAR(50) NOT NULL,
+    tipo_usuario ENUM('admin', 'cliente') NOT NULL
+);
+
+CREATE TABLE tbl_produtos (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_produto VARCHAR(100),
+    preco_produto DECIMAL(10,2),
+    quantidade_produto INT
+);
+
+CREATE TABLE tbl_vendas (
+    id_venda INT AUTO_INCREMENT PRIMARY KEY,
+    total_venda DECIMAL(10,2),
+    forma_pagamento VARCHAR(50)
+);
+
+INSERT INTO tbl_usuarios (login_usuario, senha_usuario, tipo_usuario)
+VALUES
+('admin', '123', 'admin'),
+('gustavo', '456', 'cliente');
+
+INSERT INTO tbl_produtos (nome_produto, preco_produto, quantidade_produto) VALUES
+('Dipirona', 5.50, 100),
+('Paracetamol', 7.90, 80),
+('Ibuprofeno', 12.00, 50),
+('Amoxicilina', 25.00, 30);
