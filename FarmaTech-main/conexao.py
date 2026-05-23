@@ -16,4 +16,4 @@ def conectar():
         return None
 
 if conectar():
-    print('Conectado com suceso! ')
+    print('Conectado com sucesso! ')
