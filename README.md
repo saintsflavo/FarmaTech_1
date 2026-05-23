@@ -20,6 +20,7 @@ Sistema de gerenciamento de farmácia desenvolvido em Python e MySQL.
 
 ## 🛠 Tecnologias utilizadas
 
+- Miro
 - Python
 - MySQL
 - Git
@@ -57,7 +58,7 @@ python main.py
 
 - Caio Lima
 - Danilo Alves
-- Flávio Digo
+- Flávio Diogo
 - Luiz Gustavo
 
 ---
