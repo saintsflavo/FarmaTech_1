@@ -91,20 +91,32 @@ def atualizar_produto():
 
 def deletar_produto():
 
-    id_produto = input("ID do produto para deletar: ")
+    id_produto = input("ID do produto para deletar: ").strip()
+
+    if not id_produto.isdigit():
+        print("ID inválido!")
+        return
 
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = "DELETE FROM tbl_produtos WHERE id_produto=%s"
+    try:
+        sql = "DELETE FROM tbl_produtos WHERE id_produto = %s"
 
-    cursor.execute(sql, (id_produto,))
-    conexao.commit()
+        cursor.execute(sql, (int(id_produto),))
+        conexao.commit()
 
-    cursor.close()
-    conexao.close()
-    print("")
-    print("✔ Produto removido!")
+        if cursor.rowcount == 0:
+            print("Produto não encontrado!")
+        else:
+            print("\n✔ Produto removido!")
+
+    except Exception as erro:
+        print(f"Erro ao remover produto: {erro}")
+
+    finally:
+        cursor.close()
+        conexao.close()
 
 def relatorio_vendas():
 
