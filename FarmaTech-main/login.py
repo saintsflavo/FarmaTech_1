@@ -140,13 +140,10 @@ def realizar_login():
 
             if usuario:
 
-                # entra direto na tela certa
                 if usuario["tipo_usuario"] == "admin":
-                    tela_admin(usuario["login_usuario"])
+                    menu_admin(usuario["login_usuario"])
                 else:
-                    tela_cliente(usuario["login_usuario"])
-
-                break 
+                    menu_cliente(usuario["login_usuario"])
 
         elif opcao == "0":
             print("Saindo...")

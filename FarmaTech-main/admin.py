@@ -7,13 +7,19 @@ def criar_produto():
     while True:
         try:
             preco = float(input("Preço: "))
-            break
+            if preco <= 0:
+                print("Preço inválido!")
+            else:
+                break
         except ValueError:
             print("Digite um valor válido!")
     while True:
         try:
             quantidade = int(input("Quantidade: "))
-            break
+            if quantidade <= 0:
+                print("Quantidade inválida!")
+            else:
+                break
         except ValueError:
             print("Digite uma quantia válida!")
 
@@ -44,8 +50,12 @@ def listar_produtos():
 
     print("\n        ======= PRODUTOS =======")
     print("")
-    for p in produtos:
-        print(f"ID: {p[0]} | {p[1]} | R$ {p[2]} | Estoque: {p[3]}")
+    
+    if not produtos:
+        print("Nenhum produto encontrado!")
+    else:
+        for p in produtos:
+            print(f"ID: {p[0]} | {p[1]} | R$ {p[2]} | Estoque: {p[3]}")
 
     cursor.close()
     conexao.close()
@@ -67,7 +77,12 @@ def atualizar_produto():
     while True:
         try:
             quantidade = int(input("Nova quantidade: "))
-            break
+
+            if quantidade < 0:
+                print("Quantidade inválida!")
+            else:
+                break
+
         except ValueError:
             print("Digite uma quantidade válida!")
 
@@ -152,6 +167,8 @@ def menu_admin(usuario):
         print("4 - Deletar produto")
         print("5 - Relatório de vendas")
         print("0 - Sair")
+        print("")
+        print(f"Bem-vindo(a), {usuario}")
 
         opcao = input("Escolha: ")
 
