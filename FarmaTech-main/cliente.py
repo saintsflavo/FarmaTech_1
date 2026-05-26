@@ -15,7 +15,7 @@ def listar_produtos():
 
     produtos = cursor.fetchall()
 
-    print("\n       === PRODUTOS DISPONÍVEIS ===\n")
+    print("\n     ===== PRODUTOS DISPONÍVEIS =====\n")
 
     if not produtos:
         print("Nenhum produto encontrado!")
@@ -206,7 +206,7 @@ def finalizar_compra():
 
     print("\nFormas de pagamento:")
     print("1 - Dinheiro")
-    print("2 - Cartão de crédito")
+    print("2 - Cartão (Crédito/Débito)")
     print("3 - Pix")
 
     opcao = input("Escolha a forma de pagamento: ")
@@ -215,7 +215,7 @@ def finalizar_compra():
         forma = "Dinheiro"
 
     elif opcao == "2":
-        forma = "Cartão de crédito"
+        forma = "Cartão (Crédito/Débito)"
 
     elif opcao == "3":
         forma = "Pix"

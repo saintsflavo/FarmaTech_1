@@ -10,21 +10,34 @@ CREATE TABLE tbl_usuarios (
 
 CREATE TABLE tbl_produtos (
     id_produto INT AUTO_INCREMENT PRIMARY KEY,
-    nome_produto VARCHAR(100),
-    preco_produto DECIMAL(10,2),
-    quantidade_produto INT
+    nome_produto VARCHAR(100) NOT NULL,
+    preco_produto DECIMAL(10,2) CHECK (preco_produto >= 0),
+    quantidade_produto INT CHECK (quantidade_produto >= 0)
 );
 
 CREATE TABLE tbl_vendas (
     id_venda INT AUTO_INCREMENT PRIMARY KEY,
     total_venda DECIMAL(10,2),
-    forma_pagamento VARCHAR(50)
+    forma_pagamento VARCHAR(50),
+	data_venda DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tbl_vendas_produtos (
+	id_venda_produto INT AUTO_INCREMENT PRIMARY KEY,
+    id_venda INT NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade_produto INT NOT NULL,
+    subtotal_produto DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_venda)
+    REFERENCES tbl_vendas(id_venda),
+    FOREIGN KEY (id_produto)
+    REFERENCES tbl_produtos(id_produto)
 );
 
 INSERT INTO tbl_usuarios (login_usuario, senha_usuario, tipo_usuario)
 VALUES
 ('admin', '123', 'admin'),
-('gustavo', '456', 'cliente');
+('flavio', '456', 'cliente');
 
 INSERT INTO tbl_produtos (nome_produto, preco_produto, quantidade_produto) VALUES
 ('Dipirona', 5.50, 100),
