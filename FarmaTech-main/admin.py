@@ -258,6 +258,7 @@ def menu_admin(usuario):
         print("0 - Sair")
         print("")
         print(f"Bem-vindo(a), {usuario}")
+        print("")
 
         opcao = input("Escolha: ")
 
@@ -282,3 +283,4 @@ def menu_admin(usuario):
 
         else:
             print("Opção inválida!")
+            

@@ -151,3 +151,4 @@ def realizar_login():
 
         else:
             print("❌ Opção inválida!")
+            

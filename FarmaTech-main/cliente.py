@@ -97,16 +97,30 @@ def adicionar_carrinho():
     produto = cursor.fetchone()
 
     if not produto:
+
         print("❌ Produto não encontrado.")
 
         cursor.close()
         conexao.close()
         return
 
-    if quantidade > produto[3]:
+    # VERIFICA QUANTO JÁ TEM NO CARRINHO
+
+    quantidade_no_carrinho = 0
+
+    for item in carrinho:
+
+        if item[0] == id_produto:
+            quantidade_no_carrinho += item[3]
+
+    estoque_disponivel = produto[3] - quantidade_no_carrinho
+
+    # VERIFICA ESTOQUE REAL DISPONÍVEL
+
+    if quantidade > estoque_disponivel:
 
         print("\n❌ Estoque insuficiente.")
-        print(f"Disponível: {produto[3]} unidade(s).")
+        print(f"Disponível: {estoque_disponivel} unidade(s).")
 
     else:
 
@@ -349,3 +363,4 @@ def menu_cliente(usuario):
         else:
             print("❌ Opção inválida")
             resultado = finalizar_compra()
+            
