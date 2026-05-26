@@ -208,7 +208,8 @@ def finalizar_compra():
     print("1 - Dinheiro")
     print("2 - Cartão (Crédito/Débito)")
     print("3 - Pix")
-
+    print("0 - Retornar")
+    print("")
     opcao = input("Escolha a forma de pagamento: ")
 
     if opcao == "1":
@@ -219,6 +220,13 @@ def finalizar_compra():
 
     elif opcao == "3":
         forma = "Pix"
+
+    elif opcao == "0":
+        print("\n↩ Voltando ao menu...")
+        cursor.close()
+        conexao.close()
+
+        return ("continuar")
 
     else:
         print("Opção inválida!")
@@ -267,7 +275,7 @@ def finalizar_compra():
 
     conexao.commit()
 
-    print("\n✔ Compra finalizada com sucesso!")
+    print("\n✔ Compra finalizada com sucesso!\n")
     print(f"Pagamento: {forma}")
     print(f"Total pago: R$ {total:.2f}")
 
@@ -340,3 +348,4 @@ def menu_cliente(usuario):
 
         else:
             print("❌ Opção inválida")
+            resultado = finalizar_compra()
