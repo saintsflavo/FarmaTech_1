@@ -58,7 +58,8 @@ def pesquisar_produto():
 
 
 def adicionar_carrinho():
-
+    listar_produtos()
+    print("")
     while True:
 
         try:
@@ -104,7 +105,7 @@ def adicionar_carrinho():
         conexao.close()
         return
 
-    # VERIFICA QUANTO JÁ TEM NO CARRINHO
+    # verifica quanto já tem no carrinho
 
     quantidade_no_carrinho = 0
 
@@ -115,7 +116,7 @@ def adicionar_carrinho():
 
     estoque_disponivel = produto[3] - quantidade_no_carrinho
 
-    # VERIFICA ESTOQUE REAL DISPONÍVEL
+    # verifica estoque real disponível
 
     if quantidade > estoque_disponivel:
 
