@@ -30,28 +30,53 @@ def listar_produtos():
 
 def pesquisar_produto():
 
-    nome = input("Digite o nome do produto: ")
+    pesquisa = input("Digite o nome ou ID do produto: ").strip()
 
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = """
-    SELECT id_produto, nome_produto, preco_produto, quantidade_produto
-    FROM tbl_produtos
-    WHERE nome_produto LIKE %s
-    """
 
-    cursor.execute(sql, (f"%{nome}%",))
+    if pesquisa.isdigit():
+
+        sql = """
+        SELECT id_produto, nome_produto, preco_produto, quantidade_produto
+        FROM tbl_produtos
+        WHERE id_produto = %s
+        """
+
+        cursor.execute(sql, (int(pesquisa),))
+
+
+    else:
+
+        sql = """
+        SELECT id_produto, nome_produto, preco_produto, quantidade_produto
+        FROM tbl_produtos
+        WHERE nome_produto LIKE %s
+        """
+
+        cursor.execute(sql, (f"%{pesquisa}%",))
 
     produtos = cursor.fetchall()
 
     print("\n=== RESULTADO DA PESQUISA ===")
 
     if produtos:
+
         for p in produtos:
-            print(f"ID: {p[0]} | {p[1]} | R$ {p[2]} | Estoque: {p[3]}")
+
+            print(f"""
+ID: {p[0]}
+Produto: {p[1]}
+Preço: R$ {p[2]}
+Estoque: {p[3]}
+""")
+
     else:
-        print("Nenhum produto encontrado.")
+        print("❌ Nenhum produto encontrado.")
+
+    cursor.close()
+    conexao.close()
 
     cursor.close()
     conexao.close()
@@ -331,8 +356,8 @@ def menu_cliente(usuario):
         print("5 - Remover item do carrinho")
         print("6 - Finalizar compra")
         print("0 - Sair")
-
-        opcao = input("Escolha: ")
+        print("")
+        opcao = input("Insira a opção desejada: ")
 
         if opcao == "1":
             listar_produtos()
